@@ -1,0 +1,9 @@
+{% load i18n %}
+
+<form action="{% url logout %}" id="form-logout" method="post">
+    <fieldset>
+        <legend>{% trans 'Útskráning' %}</legend>
+        <input type="submit" value="{% trans 'Útskrá' %}" />
+    </fieldset>
+</form>
+ 

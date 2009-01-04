@@ -1,0 +1,70 @@
+{% extends extends_from %}
+{% load i18n templatetools %}
+
+{% block title %}{{ profile.get_fullname }} &#124; {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="user-profile">
+{% block profile_before %}{% endblock %}
+<div class="vcard">
+    <img alt="{% trans 'Mynd af nemandanum' %}" src="{{ profile.display_image.large.url }}" class="photo" />
+    <h1 class="fn n">  
+        <span class="given-name">{{ profile.user.first_name }}</span>
+        {% if profile.middlenames %}
+        <span class="additional-name">{{ profile.middlenames }}</span>
+        {% endif %}
+        <span class="family-name">{{ profile.user.last_name }}</span>
+    </h1>
+    {% block profile_after_name %}{% endblock %}
+    
+    {% if profile.has_kennitala %}
+    <div>
+    {{ profile.get_age|format_age }} {{ profile.get_age_suffix }}, {% trans 'fæddist' %} <abbr class="bday" title="{{ profile.get_bdate }}">{{ profile.get_bdate|format_date:"þf" }}</abbr> {% trans 'og' %} {{ profile.get_closest_bday_info|format_time_to_date }}.
+    </div>
+    {% endif %}
+
+    {% block profile_after_age %}{% endblock %}
+
+    {% if profile.address %}
+    <h2>{% trans 'Heimilisfang' %}</h2>
+    <div class="adr">
+        <div>
+            <span class="street-address">{{ profile.address }}</span>,
+            <span class="postal-code">{{ profile.postalcode }}</span> <span class="locality">{{ profile.city }}</span>
+        </div>
+        <div class="country-name">Ísland</div>
+    </div>
+    {% endif %}
+
+    {% block profile_after_address %}{% endblock %}
+
+    <h2>{% trans 'Hvernig skal hafa samband við þennan notanda' %}</h2>
+    <dl>
+        <dt>{% trans 'Tölvupóstur' %}:</dt>
+        <dd><a class="email" href="mailto:{{ profile.user.email }}">{{ profile.user.email }}</a></dd>
+    
+        {% if profile.phone %}
+        <dt>{% trans 'Heimasími' %}:</dt>
+        <dd class="tel" title="home">{{ profile.phone|format_phone }}</dd>
+        {% endif %}
+    
+        {% if profile.gsm %}
+            <dt>{% trans 'Farsími' %}:</dt>
+            <dd class="tel mobile">{{ profile.gsm|format_phone }}</dd>
+    
+        {% endif %}
+    </dl>
+
+    {% if profile.has_homepages %}
+    <h2>{% trans 'Heimasíður' %}:</h2>
+    <ul>
+        {% for website in profile.homepages.all %}
+        <li><a  class="url" href="{{ website.url }}">{{ website.name }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div> 
+{% block profile_after %}{% endblock %}
+</div>
+
+{% endblock %} 

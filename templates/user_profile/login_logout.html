@@ -1,0 +1,7 @@
+{% if not on_login_page %}
+{% if login %}
+{% include 'user_profile/forms/login_form.html' %}
+{% else %}
+{% include 'user_profile/forms/logout_form.html' %}
+{% endif %}
+{% endif %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'Innskráning' %} &#124; {{ block.super }}{% endblock %}
+
+{% block content %}
+{% include 'user_profile/forms/login_form.html' %}
+{% endblock %} 

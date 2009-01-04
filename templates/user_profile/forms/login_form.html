@@ -1,0 +1,26 @@
+{% load i18n %}
+
+{% if form.errors %}
+<p class="error">{% trans 'Rangt notandanafn eða lykilorð. Vinsamlegast reynið aftur' %}</p>
+{% endif %}
+
+<form action="{% url login %}" id="{{ form.id }}" method="post">
+    <fieldset>
+        <legend>{% trans 'Innskráning' %}</legend>
+            <ul>
+                <li>
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                </li>
+                <li>
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                </li>
+                <li>
+                    <input type="hidden" name="next" value="{{ next }}" />
+                    <input tabindex="3" type="submit" name="login" value="{% trans 'Innskrá' %}" />
+                </li>
+            </ul>
+    </fieldset>
+</form>
+

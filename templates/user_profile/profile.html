@@ -1,0 +1,48 @@
+{% load i18n %}
+<div class="vcard">
+    <img alt="{% trans 'Mynd af nemandanum' %}" src="{{ profile.get_profile_image }}asdsa" class="photo" />
+
+    <h1 class="fn n">  
+        <span class="given-name">{{ profile.user.first_name }}</span>
+        {% if profile.middlenames %}
+        <span class="additional-name">{{ profile.middlenames }}</span>
+        {% endif %}
+        <span class="family-name">{{ profile.user.last_name }}</span>
+    </h1>
+    <div class="org">{{ profile.get_department }}</div>
+
+    {% if profile.address %}
+    <h3>{% trans 'Heimilisfang' %}</h3>
+    <div class="adr">
+        <div class="sa-pc">
+            <span class="street-address">{{ profile.address }}</span>,
+            <span class="postal-code">{{ profile.postalcode }}</span> <span class="locality">{{ profile.city }}</span>
+        </div>
+        <div class="country-name">Ísland</div>
+    </div>
+    {% endif %}
+
+    <h3>{% trans 'Hvernig skal hafa samband við þennan notanda' %}</h3>
+    <dl>
+        <dt>{% trans 'Tölvupóstur' %}:</dt>
+        <dd><a class="email" href="mailto:{{ profile.user.email }}">{{ profile.user.email }}</a></dd>
+    
+        {% if profile.phone %}
+        <dt>{% trans 'Heimasími' %}:</dt>
+        <dd class="tel" title="home">{{ profile.phone }}</dd>
+        {% endif %}
+    
+        {% if profile.gsm %}
+            <dt>{% trans 'Farsími' %}:</dt>
+            <dd class="tel mobile">{{ profile.gsm }}</dd>
+    
+        {% endif %}
+    </dl>
+
+    <h3>{% trans 'Heimasíður' %}:</h3>
+    <ul>
+        {% for website in profile.homepages.all %}
+        <li><a href="{{ website.url }}">{{ website.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div> 
