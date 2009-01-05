@@ -74,13 +74,13 @@ class DisplayImage(models.Model):
     def _save_image(self, filename, image, size):
         image.thumbnail(DISPLAY_IMAGE_SIZE[size])
 
-        directory = os.path.join(settings.MEDIA_ROOT, get_directory(size))
+        directory = os.path.join(settings.MEDIA_ROOT, UTILS.get_directory(size))
 
         if not os.path.exists(directory):
             os.mkdir(directory, 0777)
             os.chmod(directory, 0777) #0777 means that everyone can read, write and execute
 
-        filepath = get_path_to_image(size, filename)
+        filepath = UTILS.get_path_to_image(size, filename)
         image.save(filepath)
         return image
 
@@ -88,7 +88,7 @@ class DisplayImage(models.Model):
         head, filename = os.path.split(self.display_image.name)
         for size in DISPLAY_IMAGE_SIZE.keys():
             try:
-                os.remove(get_path_to_image(size, filename))
+                os.remove(UTILS.get_path_to_image(size, filename))
             except OSError:
                 #TODO: Notify
                 pass
@@ -440,12 +440,12 @@ def resize_default_image(sender, created_models, verbosity, interactive, **kwarg
         pass
     else:
         for size_name, size in DISPLAY_IMAGE_SIZE.iteritems():
-            directory = os.path.join(settings.MEDIA_ROOT, get_directory(size_name))
+            directory = os.path.join(settings.MEDIA_ROOT, UTILS.get_directory(size_name))
             if not os.path.exists(directory):
                 os.mkdir(directory, 0777)
                 os.chmod(directory, 0777) #0777 means that everyone can read, write and execute?
 
-            path = get_path_to_image(size_name, filename )
+            path = UTILS.get_path_to_image(size_name, filename )
 
             if not os.path.exists(path):
                 image = default_image.copy()
