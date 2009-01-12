@@ -13,7 +13,7 @@ urlpatterns = patterns('',
             kwargs = {'template_name': 'user_profile/change_password.html' }, name='change_password'),
     url(r'^lykilordinu-var-breytt/$', 'django.contrib.auth.views.password_change_done',
             kwargs = {'template_name': 'user_profile/change_password_success.html' }, name='change_password_success'),
-    url(r'^(?P<username>\w+)/$', show_profile, name = 'user'),
+    url(r'^(?P<username>[\w-]+)/$', show_profile, name = 'user'),
 )
 
 
