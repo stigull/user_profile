@@ -163,7 +163,7 @@ class UserProfile(models.Model):
         if display_image_ids:
             return self.user.display_images.get(id = choice(display_image_ids))
         else:
-            return DisplayImage(user = None, display_image = DISPLAY_IMAGE_DEFAULT)
+            return DisplayImage(user = User(), display_image = DISPLAY_IMAGE_DEFAULT)
 
     def has_kennitala(self):
         """
