@@ -63,9 +63,9 @@ class DisplayImage(models.Model):
         verbose_name_plural = _(u"Myndir af nemendum")
 
     def save(self):
-        image_file = self.display_image.file
-        image = Image.open(image_file)
-        head, filename = os.path.split(image_file._name)
+        image_file = self.display_image
+        image = Image.open(image_file._file)
+        head, filename = os.path.split(image_file.name)
 
         for size in DISPLAY_IMAGE_SIZE.keys():
             self._save_image(filename, image.copy(), size)
