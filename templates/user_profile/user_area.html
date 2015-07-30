@@ -3,7 +3,7 @@
 {% with user.get_profile as profile %}
 <div id="userarea">
 <h1>{% trans 'Eiginrúm' %}</h1>
-<p>{{ profile.get_logged_in_note }}</p>
+<span>{{ profile.get_logged_in_note }}</span> <br/>
 <h2>{% trans 'Flýtileiðir' %}</h2>
 <ul>
     {% if user.is_staff or profile.in_government %}
