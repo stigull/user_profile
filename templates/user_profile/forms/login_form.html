@@ -4,7 +4,7 @@
 <p class="error">{% trans 'Rangt notandanafn eða lykilorð. Vinsamlegast reynið aftur' %}</p>
 {% endif %}
 
-<form action="{% url login %}" id="{{ form.id }}" method="post">
+<form action="{% url login %}" id="{{ form.id }}" method="post">{% csrf_token %}
     <fieldset>
         <legend>{% trans 'Innskráning' %}</legend>
             <ul>

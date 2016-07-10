@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<form action="{% url logout %}" id="form-logout" method="post">
+<form action="{% url logout %}" id="form-logout" method="post">{% csrf_token %}
     <fieldset>
         <legend>{% trans 'Útskráning' %}</legend>
         <input type="submit" value="{% trans 'Útskrá' %}" />

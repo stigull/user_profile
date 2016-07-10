@@ -203,7 +203,7 @@ class UserProfile(models.Model):
         if self.is_male():
             return u"Þú ert innskráður sem %s (%s)" % (self.get_short_fullname(), self.user.username)
         else:
-            return u"Þú ert innskráð sem %s (%s)" % (self.get_short_fullname(). self.user.username )
+            return u"Þú ert innskráð sem %s (%s)" % (self.get_short_fullname(), self.user.username )
 
     def get_short_fullname(self):
         """
@@ -225,7 +225,7 @@ class UserProfile(models.Model):
 
     def get_fullname(self):
         """
-        Notkun:	    fullname = user.get_profile().fullname
+        Notkun:     fullname = user.get_profile().fullname
         Eftir:      fullname er fullt nafn notandans
         """
         if self.user.first_name != u'' and self.user.last_name != u'':
